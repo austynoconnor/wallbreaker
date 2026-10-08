@@ -1,3 +1,5 @@
+import { dashboardFetch } from "./dashboardFetch";
+
 export interface ConfigInfo {
   has_target: boolean;
   target: string | null;
@@ -229,7 +231,7 @@ export interface FireResult extends ComposeResult {
 }
 
 async function j<T>(url: string, init?: RequestInit): Promise<T> {
-  const r = await fetch(url, init);
+  const r = await dashboardFetch(url, init);
   if (!r.ok) {
     let detail = r.statusText;
     try {
@@ -328,7 +330,7 @@ export async function runAgent(
   onEvent: (ev: AgentEvent) => void,
   signal?: AbortSignal
 ): Promise<void> {
-  const r = await fetch("/api/agent/run", {
+  const r = await dashboardFetch("/api/agent/run", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

@@ -1,3 +1,4 @@
+import { dashboardFetch } from "../dashboardFetch";
 import type {
   ApiResult,
   ArsenalItem,
@@ -24,7 +25,7 @@ class HttpError extends Error {
 }
 
 async function request<T>(url: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(url, init);
+  const response = await dashboardFetch(url, init);
   if (!response.ok) {
     let message = response.statusText || `Request failed (${response.status})`;
     try {
@@ -231,7 +232,7 @@ export const v2Api = {
     signal: AbortSignal,
   ): Promise<void> {
     const url = `/api/v2/executions/${encodeURIComponent(executionId)}/events?after=${after}`;
-    const response = await fetch(url, { signal, headers: { Accept: "text/event-stream" } });
+    const response = await dashboardFetch(url, { signal, headers: { Accept: "text/event-stream" } });
     if (!response.ok || !response.body) throw new HttpError(response.status, response.statusText);
     const reader = response.body.getReader();
     const decoder = new TextDecoder();

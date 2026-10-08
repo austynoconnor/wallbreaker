@@ -1,5 +1,22 @@
 # Changelog
 
+## Local Windows setup — 2026-10-08 16:25 CDT — GPT-6.1 Sol
+
+- Installed an isolated Python 3.13 environment with terminal, dashboard,
+  development, barcode, and steganography dependencies.
+- Installed the dashboard frontend dependencies and resolved the stale npm
+  lockfile so the production browser interface can be built.
+- Configured Opus 4.6 and Opus 4.5 profiles plus a Haiku 4.5 judge. Launchers
+  load the existing Anthropic credential from Codex Router's local storage.
+- Added dashboard and terminal launchers; the dashboard binds to local port
+  8787. The operator selects a target before starting an evaluation.
+- Installed the optional native Parseltongue transform engine.
+- **2026-10-08 16:27 CDT — GPT-6.1 Sol:** Fixed both dashboard clients to
+  bootstrap the local session token and send it with API and streaming requests.
+  Previously, the running backend rejected the browser's requests with HTTP 401,
+  leaving provider lists empty and V2 offline. Added regression coverage for
+  shared bootstrap, header preservation, token rotation, and local-only requests.
+
 ## Unreleased — WebUI V2 unified operator surface
 
 - Added a shared typed capability catalog so TUI behavior is the canonical contract and

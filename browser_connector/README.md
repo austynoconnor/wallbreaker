@@ -11,7 +11,8 @@ permission and does not extract login cookies or use undocumented Muse endpoints
    and copies its pairing key to the clipboard.
 2. Open `chrome://extensions`, enable Developer mode, click **Load unpacked**, and
    select this repository's `browser_connector/extension` folder.
-3. Open a dedicated Muse side chat. Click the extension, paste the pairing key,
+3. Open a dedicated Muse side chat and send a harmless first message to create it.
+   Click the extension, paste the pairing key,
    and click **Connect this Muse chat**. Leave that tab open.
 4. In Wallbreaker select the `muse-browser` target profile, while retaining an API
    attacker and judge. Start your run explicitly in Wallbreaker.

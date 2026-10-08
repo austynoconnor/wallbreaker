@@ -18,6 +18,8 @@
   Muse provider into the running dashboard without interrupting its active run.
   Chrome installation needs the operator's Load unpacked step; a live browser
   round trip remains unverified until installation and pairing are complete.
+- **2026-10-08 17:13 CDT — GPT-6.1 Sol:** Reject the temporary /thread/new
+  composer URL so first-message navigation cannot detach a newly paired request.
 
 ## Local fix — 2026-10-08 16:39 CDT — GPT-6.1 Sol
 

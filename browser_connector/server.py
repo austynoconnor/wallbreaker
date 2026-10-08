@@ -107,7 +107,7 @@ def create_app(key: str, timeout: float = 180, stale_after: float = 15) -> FastA
     @app.post("/bridge/connect")
     async def connect(connection: Connection):
         parsed = urlparse(connection.url)
-        if parsed.scheme != "https" or parsed.netloc != "muse.ai" or not parsed.path.startswith("/thread/"):
+        if parsed.scheme != "https" or parsed.netloc != "muse.ai" or not parsed.path.startswith("/thread/") or parsed.path.rstrip("/") == "/thread/new":
             raise HTTPException(400, "Open a dedicated Muse side chat before connecting.")
         if state["job"]:
             raise HTTPException(409, "Finish or disconnect the current request first.")

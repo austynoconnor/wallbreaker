@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((message, sender, reply) => {
     if (message.type === "connect" && !sender.tab) {
       const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
       const url = new URL(tab?.url || "https://invalid.local");
-      if (url.origin !== "https://muse.ai" || !url.pathname.startsWith("/thread/")) throw new Error("Open a dedicated Muse side chat, then connect here.");
+      if (url.origin !== "https://muse.ai" || !url.pathname.startsWith("/thread/") || url.pathname.replace(/\/$/, "") === "/thread/new") throw new Error("Open a dedicated Muse side chat and send a harmless first message to create it, then connect here.");
       const previous = await chrome.storage.session.get("pair");
       if (previous.pair) throw new Error("Disconnect the current chat before connecting another.");
       await chrome.storage.local.set({key: message.key.trim()});

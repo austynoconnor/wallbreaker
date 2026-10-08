@@ -1,5 +1,15 @@
 # Changelog
 
+## Muse picker setup — 2026-10-08 17:22 CDT — GPT-6.1 Sol
+
+- Added muse-browser to the running dashboard's persisted manual model catalog.
+  Localhost model discovery is deliberately blocked by the existing egress guard;
+  the configured provider had no catalog entry before this setup correction.
+- Refreshed the browser's cached provider list, verified muse-browser in both the
+  provider and model selectors, and saved it as the target assignment.
+- Verified a live extension round trip through /v1/chat/completions: a harmless
+  request returned WALLBREAKER_BRIDGE_OK from the connected Muse Chrome chat.
+
 ## Muse browser connector — 2026-10-08 17:06 CDT — GPT-6.1 Sol
 
 - Added a localhost OpenAI-compatible text bridge on port 8788 and an unpacked

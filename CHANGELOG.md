@@ -1,5 +1,24 @@
 # Changelog
 
+## Muse browser connector — 2026-10-08 17:06 CDT — GPT-6.1 Sol
+
+- Added a localhost OpenAI-compatible text bridge on port 8788 and an unpacked
+  Chrome extension. Connect grants active-tab access to one chosen Muse side chat;
+  prompts use its visible composer, and new visible replies return to Wallbreaker.
+- Added a connection popup with status, pairing and disconnect controls. The
+  transport serializes prompts, binds the thread URL, never reclaims a sent job,
+  and surfaces timeouts, lost tabs, missing controls and human-approval stops.
+- System overrides, tool calls, image inputs and assistant prefills are rejected.
+  Existing chat context persists; completed text is returned through SSE without
+  fabricating token counts or hidden reasoning. Added setup instructions and
+  regression tests for authentication, reply correlation, errors and expiration.
+- **2026-10-08 17:12 CDT — GPT-6.1 Sol:** Verified 12 bridge/provider tests and
+  four mocked DOM extension tests, including consumption through Wallbreaker's
+  real OpenAI provider. Added a Windows setup shortcut and loaded the local
+  Muse provider into the running dashboard without interrupting its active run.
+  Chrome installation needs the operator's Load unpacked step; a live browser
+  round trip remains unverified until installation and pairing are complete.
+
 ## Local fix — 2026-10-08 16:39 CDT — GPT-6.1 Sol
 
 - Validated queued V2 agent-run dictionaries as AgentRunRequest before invoking

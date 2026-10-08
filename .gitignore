@@ -76,3 +76,6 @@ specs/
 .serena/
 *.log
 .DS_Store
+
+# Browser connector runtime credentials
+browser_connector/.local/

@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="popup.css"><title>Muse Connector</title></head>
+<body><header><span class="mark">W</span><div><h1>Muse Connector</h1><p>WALLBREAKER / BROWSER TARGET</p></div></header>
+<main><div class="status"><span id="dot"></span><strong id="status">Disconnected</strong></div><p id="detail">Open a dedicated Muse side chat and connect it here.</p>
+<label for="key">Local pairing key</label><input id="key" type="password" autocomplete="off" placeholder="Paste the key from the setup launcher">
+<button id="connect">Connect this Muse chat</button><button id="disconnect" class="secondary" hidden>Disconnect chat</button>
+<p class="note">Only the selected chat receives prompts. Keep the tab open. Muse approvals stay with you.</p><div id="error" role="alert" hidden></div>
+<footer>Local bridge <span>127.0.0.1:8788</span></footer></main><script src="popup.js"></script></body></html>

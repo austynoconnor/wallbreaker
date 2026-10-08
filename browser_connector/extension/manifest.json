@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Wallbreaker · Muse Connector",
+  "version": "1.0.0",
+  "description": "Connect one chosen Muse side chat to the local Wallbreaker text target.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["http://127.0.0.1:8788/*"],
+  "background": {"service_worker": "background.js"},
+  "action": {"default_popup": "popup.html", "default_title": "Wallbreaker Muse Connector"}
+}

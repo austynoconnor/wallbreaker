@@ -163,6 +163,46 @@ def test_v2_runs_headless_tui_catalog_capability(tmp_path):
         assert "/session" in execution["result"]["content"]
 
 
+def test_v2_agent_queue_validates_request_and_consumes_stream(tmp_path, monkeypatch):
+    from wallbreaker.agent.messages import StopEvent, TextDelta
+    from wallbreaker.tools.registry import ToolContext, ToolRegistry
+    import wallbreaker.providers.factory as factory_mod
+    import wallbreaker.tools as tools_mod
+
+    attacker = Endpoint("attacker", "openai", "http://unused.test", "test-model")
+    config = Config(default_profile="attacker", profiles={"attacker": attacker},
+                    target=attacker, path=tmp_path / "config.toml")
+    observed = []
+
+    class FakeProvider:
+        endpoint = attacker
+
+        async def stream(self, messages, tools=None, system=None, max_tokens=4096, temperature=None):
+            observed.append(messages[0].text())
+            yield TextDelta("Startup check passed.")
+            yield StopEvent("end_turn")
+
+        async def aclose(self):
+            pass
+
+    registry = ToolRegistry(ToolContext(config=config))
+    monkeypatch.setattr(factory_mod, "build_provider", lambda _endpoint: FakeProvider())
+    monkeypatch.setattr(tools_mod, "build_registry", lambda _config: registry)
+    with TestClient(create_app(config=config, sessions_dir=tmp_path / "sessions")) as client:
+        created = client.post("/api/v2/executions", json={"capability_id": "agent.run",
+            "args": {"objective": "Harmless startup check", "max_rounds": 1}})
+        assert created.status_code == 200
+        execution_id = created.json()["id"]
+        for _ in range(100):
+            execution = client.get(f"/api/v2/executions/{execution_id}").json()
+            if execution["status"] in {"succeeded", "failed", "cancelled"}:
+                break
+            time.sleep(0.01)
+        assert execution["status"] == "succeeded", execution
+        assert observed == ["Harmless startup check"]
+        assert execution["run_id"]
+
+
 def test_v2_runs_ordered_workflow_and_emits_step_events(tmp_path):
     with TestClient(create_app(config=None, sessions_dir=tmp_path)) as client:
         created = client.post(

@@ -100,7 +100,7 @@ function normalizeEvent(value: unknown, executionId: string, index: number): Eve
   const label = text(row.verdict || row.label || data.verdict) || undefined;
   const strategy = text(row.strategy || row.technique || data.strategy || data.technique) || undefined;
   const summary = text(row.summary || row.message || data.summary || data.message || row.detail || row.operation || row.tool || row.name || data.tool || data.state) || undefined;
-  const response = text(row.text || row.response || row.content || data.text || data.response || data.content) || undefined;
+  const response = text(row.text || row.response || row.content || data.text || data.response || data.content || (kind === "error" ? row.error || data.error : undefined)) || undefined;
   const sequence = number(row.sequence || row.seq) || index + 1;
   return {
     version: number(row.version) || 1,

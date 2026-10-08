@@ -2090,7 +2090,7 @@ def create_app(
         }
 
     async def _agent_execution(ctx, args: dict):
-        response = await agent_run(args)
+        response = await agent_run(AgentRunRequest.model_validate(args))
         if agent_control is not None:
             agent_control["execution_id"] = ctx.execution.id
         buffer = ""

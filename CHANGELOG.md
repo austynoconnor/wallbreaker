@@ -1,5 +1,13 @@
 # Changelog
 
+## Local fix — 2026-10-08 16:39 CDT — GPT-6.1 Sol
+
+- Validated queued V2 agent-run dictionaries as AgentRunRequest before invoking
+  the typed streaming handler. Previously every queued run failed at round zero
+  with `AttributeError: 'dict' object has no attribute 'model_dump'`.
+- Exposed saved error text in Live's event content instead of showing an empty
+  detail panel. Added mocked queue-to-stream and frontend error regression tests.
+
 ## Local Windows setup — 2026-10-08 16:25 CDT — GPT-6.1 Sol
 
 - Installed an isolated Python 3.13 environment with terminal, dashboard,
